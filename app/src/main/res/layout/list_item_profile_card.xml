@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.ashdroid.shaadiassignment.adapters.MatchProfileCardListAdapter.ViewData" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingStart="8dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="6dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imImage"
+                    imageUrl="@{viewData.image}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/overlay_black_gradient"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/space" />
+
+                <Space
+                    android:id="@+id/space"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    app:layout_constraintBottom_toTopOf="@id/tvName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@{viewData.fullName}"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/lato_bold"
+                    app:layout_constraintBottom_toTopOf="@id/tvAgeGenderInfo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Robert Weirde" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAgeGenderInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@{viewData.genderAge}"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@id/tvLocationInfo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="M, 29 yrs" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLocationInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@{viewData.cityStateCountry}"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@id/vwDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Mumbai, Maharashtra, India" />
+
+                <View
+                    android:id="@+id/vwDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:alpha="0.5"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toTopOf="@id/tvState"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvState"
+                    visible="@{viewData.actionPerformed}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="@{viewData.actionPerformedLabel}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@id/cavAccept"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="@string/you_have_accepted_this_profile" />
+
+                <com.ashdroid.shaadiassignment.customviews.CardActionView
+                    android:id="@+id/cavAccept"
+                    visible="@{!viewData.actionPerformed}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:actionBackground="@drawable/circle_green"
+                    app:actionIcon="@drawable/ic_baseline_check_24"
+                    app:actionText="Accept"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/cavDecline"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.ashdroid.shaadiassignment.customviews.CardActionView
+                    android:id="@+id/cavDecline"
+                    visible="@{!viewData.actionPerformed}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:actionBackground="@drawable/circle_red"
+                    app:actionIcon="@drawable/ic_baseline_close_24"
+                    app:actionText="Decline"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cavAccept" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+</layout>

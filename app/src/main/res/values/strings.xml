@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Shaadi Assignment</string>
+    <string name="you_have_accepted_this_profile">You have accepted this profile</string>
+    <string name="you_have_declined_this_profile">You have declined this profile</string>
+</resources>
